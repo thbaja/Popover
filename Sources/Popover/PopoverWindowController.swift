@@ -11,7 +11,7 @@ class PopoverWindowController: NSWindowController, NSWindowDelegate {
     public private(set) var windowIsOpen: Bool = false
     public private(set) var isAnimating: Bool = false
 
-    private let popover: Popover
+    private weak var popover: Popover?
     private let wConfig: PopoverConfiguration
 
     init(with popover: Popover, contentViewController: NSViewController, windowConfiguration: PopoverConfiguration) {
@@ -61,7 +61,7 @@ class PopoverWindowController: NSWindowController, NSWindowDelegate {
 
     private func visibleStatusItemWindowFrame() -> (frame: NSRect, arrowXLocation: CGFloat) {
         let screenFrame = currentMouseScreen().frame
-        let statusItemRect = popover.item.button?.window?.frame ?? .zero
+        let statusItemRect = popover?.item.button?.window?.frame ?? .zero
 
         guard let window = self.window else { return (.zero, 0.0) }
 
