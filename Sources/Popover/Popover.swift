@@ -86,6 +86,15 @@ public class Popover: NSObject {
         localEventMonitor?.start()
     }
 
+    /// Creates a Popover with given contentViewController.
+    ///
+    /// You are responsible for showing and dismissing the Popover since the pass item will only be used for location of popover.
+    public func prepare(with item: NSStatusItem, contentViewController viewController: NSViewController) {
+        self.item = item
+        popoverWindowController = PopoverWindowController(with: self, contentViewController: viewController, windowConfiguration: wConfig)
+        localEventMonitor?.start()
+    }
+
     public func show() {
       self.show(withFocus: true)
     }
